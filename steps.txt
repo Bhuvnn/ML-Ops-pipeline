@@ -1,0 +1,5 @@
+-> Building Pipeline
+    1. Create a Github Repo
+    2. Add src folder along with all components (run time individually)
+    3. Add Data,models,report directories to .gitignore file
+    3. Now git add,commit,push
