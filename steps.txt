@@ -2,4 +2,9 @@
     1. Create a Github Repo
     2. Add src folder along with all components (run time individually)
     3. Add Data,models,report directories to .gitignore file
-    3. Now git add,commit,push
+    4. Now git add,commit,push
+
+-> Setting up DVC Pipeline (Without Parameters)
+    5. Create a dvc.ymal file and add stages to it.
+    6. dvc init then do dvc repo to test the pipeine automation. 
+    7. Now git add,commit,push

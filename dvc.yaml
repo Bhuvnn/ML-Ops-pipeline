@@ -1,0 +1,51 @@
+stages:
+  data_ingestion:
+    cmd: python src/data_ingestion.py
+    deps:
+      - src/data_ingestion.py
+      - Experiments/spam.csv
+    outs:
+      - data/train.csv
+      - data/test.csv
+
+  data_preprocessing:
+    cmd: python src/data_preprocessing.py
+    deps:
+      - src/data_preprocessing.py
+      - data/train.csv
+      - data/test.csv
+    # params:
+    #   - preprocessing.test_size
+    outs:
+      - data/intermin/preprocessed_train.csv
+      - data/intermin/preprocessed_test.csv
+
+  feature_engineering:
+    cmd: python src/feature_engineering.py
+    deps:
+      - src/feature_engineering.py
+      - data/intermin/preprocessed_train.csv
+      - data/intermin/preprocessed_test.csv
+    outs:
+      - data/final/final_train.csv
+      - data/final/final_test.csv
+
+  model_building:
+    cmd: python src/model_building.py
+    deps:
+      - src/model_building.py
+      - data/final/final_train.csv
+    # params:
+    #   - model.n_estimators
+    #   - model.max_depth
+    outs:
+      - models/model.pkl
+
+  model_evaluation:
+    cmd: python src/model_evaluation.py
+    deps:
+      - src/model_evaluation.py
+      - models/model.pkl
+      - data/final/final_test.csv
+    # outs:
+    #   - metrics.json
