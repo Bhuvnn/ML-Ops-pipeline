@@ -2,9 +2,11 @@ import pandas as pd
 import os
 import logging
 from sklearn.model_selection import train_test_split
-
+import yaml
 log_dir="logs"
 os.makedirs(log_dir,exist_ok=True)
+
+
 
 
 # Creation of Logger
@@ -26,6 +28,10 @@ file_handler.setFormatter(formatter) # Adding the formatter to file handler
 logger.addHandler(console_handler) # passing the handler back to logger
 logger.addHandler(file_handler) # passing the handler back to logger
 
+def load_params(path):
+    with open(path,"r") as f:
+        params=yaml.safe_load(f)
+    return params
 
 def load_data (data_url):
     try:
@@ -65,9 +71,11 @@ def save_data(train_data,test_data,data_path):
         raise
 
 def main():
-    test_size=0.1
     path="Experiments\spam.csv"
+    yaml_path="params.yaml"
     try:
+        params=load_params(yaml_path)
+        test_size=params["data_ingestion"]["test_size"]
         df=load_data(path)
         new_df=preprocess_data(df)
         train_data,test_data=train_test_split(new_df,test_size=test_size,random_state=3)
