@@ -11,4 +11,7 @@
 
 -> Setting up DVC Pipeline (with Parameters)
     8. add params.yaml file
-    9. Add the params setup 
+    9. Add the params setup into the code to read yaml file (load_yaml())
+    10. Now once done adding necessary parameters in yaml file, in dvc.yaml add a params section and within that add new parameters using <filename.params>.
+    11. Now do dvc repro 
+    12. Now git add,commit,push
